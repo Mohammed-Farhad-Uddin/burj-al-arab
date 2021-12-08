@@ -1,8 +1,8 @@
+//module 44,49,42
 import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
-  Routes,
   Switch,
   Route
 } from "react-router-dom";
@@ -17,7 +17,13 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 export const UserContext=createContext()
 
 function App() {
-  const [loggedInUser,setLoggedInUser]=useState({})
+  const [loggedInUser,setLoggedInUser]=useState({
+    displayName:'',
+    email:'',
+    password:'',
+    phoneNumber:'',
+    errorMessage:''
+  })
 
   return (
     <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
