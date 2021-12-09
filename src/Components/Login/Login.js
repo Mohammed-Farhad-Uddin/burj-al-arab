@@ -39,6 +39,7 @@ const Login = () => {
                 email,
                 phoneNumber
             })
+            storeAuthToken();//login tekhe jawar aghe token store er funtion ta k call kora hoice
             history.replace(from)
         }).catch((error) => {
             // Handle Errors here.
@@ -95,6 +96,7 @@ const Login = () => {
                 // Signed in 
                 const user = userCredential.user;
                 // console.log(user)
+                storeAuthToken();////login tekhe jawar aghe token store er funtion ta k call kora hoice
                 history.replace(from)
 
             })
@@ -108,6 +110,7 @@ const Login = () => {
                     .then((userCredential) => {
                         // Signed in 
                         const user = userCredential.user;
+                        storeAuthToken();//login tekhe jawar aghe token store er funtion ta k call kora hoice
                         history.replace(from)
                     })
                     .catch((error) => {
@@ -119,6 +122,19 @@ const Login = () => {
             });
         }
         
+    }
+
+    //firebase jwt token client side for more secure.ei token ta session store e store kora rakha hobe
+    const storeAuthToken=()=>{
+        const auth = getAuth();
+        auth.currentUser.getIdToken(/* forceRefresh */ true)
+        .then(function(idToken) {
+            // Send token to your backend viat HTTPS
+            sessionStorage.setItem('token',idToken)//jotokkn logIn takbe session e token ta save takbe tai setItem e set kora hoice
+            // console.log(idToken)
+        }).catch(function(error) {
+            // Handle error
+        });
     }
     return (
         <div>
